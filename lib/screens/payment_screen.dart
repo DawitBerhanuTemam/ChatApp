@@ -47,9 +47,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
       } else {
         // Use Payment Sheet for mobile/desktop
         await _stripeService.makePayment(amount: amount);
-        
+
         if (mounted) {
-          _showMessage('Payment successful! Amount: \$${amount.toStringAsFixed(2)}');
+          _showMessage(
+              'Payment successful! Amount: \$${amount.toStringAsFixed(2)}');
           _amountController.clear();
         }
       }
@@ -69,7 +70,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Future<void> _handleWebCheckout(double amount) async {
     try {
       // Create checkout session
-      final session = await _stripeService.createCheckoutSession(amount: amount);
+      final session =
+          await _stripeService.createCheckoutSession(amount: amount);
       final checkoutUrl = session['url'];
 
       if (checkoutUrl == null) {
@@ -80,7 +82,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       final uri = Uri.parse(checkoutUrl);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-        
+
         if (mounted) {
           _showMessage('Redirecting to Stripe Checkout...');
           _amountController.clear();
@@ -106,191 +108,333 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        title: const Text('Fund Account'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Support',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+        backgroundColor: const Color(0xFFF5F5F5),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 20),
-                  
-                  // Header
-                  const Icon(
-                    Icons.account_balance_wallet,
-                    size: 80,
-                    color: Colors.deepPurple,
-                  ),
-                  const SizedBox(height: 20),
-            
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 20),
+
+            // Card Visual
+            _buildCardVisual(),
+            const SizedBox(height: 40),
+
+            // Support Description
             const Text(
-              'Add Funds',
-              textAlign: TextAlign.center,
+              'Support Our App',
               style: TextStyle(
                 fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            
-            const Text(
-              'Enter the amount you want to add to your account',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 40),
-            
-            // Amount Input
-            TextField(
-              controller: _amountController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
-              decoration: InputDecoration(
-                labelText: 'Amount',
-                hintText: '0.00',
-                prefixIcon: const Icon(Icons.attach_money),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: Colors.deepPurple,
-                    width: 2,
-                  ),
-                ),
-              ),
-              style: const TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 30),
-            
-            // Quick Amount Buttons
-            const Text(
-              'Quick Select',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+                height: 1.2,
               ),
             ),
             const SizedBox(height: 12),
-            
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                _buildQuickAmountButton(10),
-                _buildQuickAmountButton(25),
-                _buildQuickAmountButton(50),
-                _buildQuickAmountButton(100),
-                _buildQuickAmountButton(250),
-                _buildQuickAmountButton(500),
-              ],
+
+            const Text(
+              'Your contribution helps us improve and bring you better features. Every support counts!',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
             const SizedBox(height: 40),
-            
-            // Fund Button
+
+            // Amount Label
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'ENTER AMOUNT',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black45,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Amount Input
+            TextField(
+              controller: _amountController,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+              ],
+              decoration: const InputDecoration(
+                hintText: '0.00',
+                prefixText: '\$',
+                prefixStyle: TextStyle(
+                  fontSize: 56,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w300,
+                ),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+              ),
+              style: const TextStyle(
+                fontSize: 56,
+                color: Colors.black,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            const SizedBox(height: 30),
+
+            // Quick Amount Buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildQuickAmountButton(10),
+                _buildQuickAmountButton(50),
+                _buildQuickAmountButton(100),
+                _buildQuickAmountButton(500),
+                _buildQuickAmountButton(750),
+              ],
+            ),
+            const SizedBox(height: 50),
+
+            // Support Button
             SizedBox(
-              height: 56,
+              height: 60,
               child: ElevatedButton(
                 onPressed: _isProcessing ? null : _handlePayment,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  elevation: 2,
+                  elevation: 0,
                 ),
                 child: _isProcessing
                     ? const SizedBox(
                         height: 24,
                         width: 24,
                         child: CircularProgressIndicator(
-                          color: Colors.white,
+                          color: Colors.black,
                           strokeWidth: 2,
                         ),
                       )
                     : const Text(
-                        'Fund Account',
+                        'Support →',
                         style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
               ),
             ),
             const SizedBox(height: 30),
-            
-            // Test Mode Info
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.amber.shade50,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.amber.shade200),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.info_outline, color: Colors.amber.shade700),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Test Mode',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.amber.shade900,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Use test card: 4242 4242 4242 4242\nAny future expiry date and any 3-digit CVC',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-                ],
-              ),
-            ),
+          ],
+        ),
+      ),
     );
   }
 
   Widget _buildQuickAmountButton(int amount) {
-    return OutlinedButton(
-      onPressed: _isProcessing
-          ? null
-          : () {
-              _amountController.text = amount.toString();
-            },
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        side: const BorderSide(color: Colors.deepPurple),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+    return Expanded(
+      child: OutlinedButton(
+        onPressed: _isProcessing
+            ? null
+            : () {
+                _amountController.text = amount.toString();
+              },
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          side: const BorderSide(color: Colors.black26, width: 1),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(
+          '\$$amount',
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
         ),
       ),
-      child: Text(
-        '\$$amount',
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.deepPurple,
+    );
+  }
+
+  Widget _buildCardVisual() {
+    return Center(
+      child: SizedBox(
+        height: 280,
+        width: 360,
+        child: Stack(
+          children: [
+            // Back card (blue)
+            Positioned(
+              left: 0,
+              top: 80,
+              child: Transform.rotate(
+                angle: -0.1,
+                child: Container(
+                  width: 320,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF4A90E2),
+                        Color(0xFF357ABD),
+                      ],
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.credit_card,
+                                color: Colors.white.withOpacity(0.8), size: 32),
+                            Icon(Icons.contactless,
+                                color: Colors.white.withOpacity(0.8), size: 28),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Debit Card',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.8),
+                                fontSize: 12,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              '•••• 0958',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  'VISA',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Front card (gradient teal/green)
+            Positioned(
+              left: 40,
+              top: 0,
+              child: Transform.rotate(
+                angle: 0.05,
+                child: Container(
+                  width: 320,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF4ECCA3),
+                        Color(0xFF3DBEA0),
+                      ],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.credit_card,
+                                color: Colors.white.withOpacity(0.9), size: 32),
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: const Icon(Icons.contactless,
+                                  color: Colors.white, size: 20),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Debit Card',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontSize: 12,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              '•••• 4568',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
