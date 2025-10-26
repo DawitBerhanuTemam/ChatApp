@@ -1,12 +1,22 @@
-# TechiBot ChatBot
+# AbyssiniaBot
 
-A Flutter chatbot application with Stripe payment integration.
+A Flutter chatbot application with integrated Stripe payment system, powered by Google's Gemini AI.
 
 ## Features
 
-- 💬 Interactive chat interface
+- 💬 Interactive chat interface with AI-powered responses
+- 🤖 Powered by Google Gemini AI
 - 💳 Stripe payment integration (works on web, mobile, and desktop)
 - 🌐 Cross-platform support (Web, iOS, Android, macOS, Windows, Linux)
+- 🎨 Modern Material Design 3 UI
+- 💾 Real-time message handling with state management
+
+## 📋 Development Plan
+
+For detailed Agile development plan, sprint planning, and roadmap, see **[AGILE_PLAN.md](AGILE_PLAN.md)**
+
+**Current Version**: 1.0 (MVP)  
+**Target Release**: Version 1.1 (End of Sprint 2)
 
 ## Quick Start
 
@@ -66,12 +76,47 @@ Use Stripe test card:
 - **Expiry**: Any future date (e.g., 12/25)
 - **CVC**: Any 3 digits (e.g., 123)
 
+## Technology Stack
+
+### Frontend
+- **Framework**: Flutter (Dart)
+- **State Management**: GetX
+- **HTTP Client**: http package
+- **Payment**: flutter_stripe
+- **UI Components**: Material Design 3
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Payment Processing**: Stripe SDK
+- **Environment**: dotenv
+
+### AI Integration
+- **Provider**: Google Gemini AI API
+
+## Architecture
+
+```
+AbyssiniaBot
+├── Frontend (Flutter)
+│   ├── Screens (UI)
+│   ├── Controllers (State Management)
+│   ├── Services (API Integration)
+│   └── Config (Environment)
+│
+└── Backend (Node.js)
+    ├── Payment Endpoints
+    ├── Webhook Handling
+    └── API Routes
+```
+
 ## Project Structure
 
 ```
 lib/
-├── screens/          # UI screens
+├── screens/          # UI screens (chat, payment, home)
 ├── services/         # Business logic & API calls
+├── controllers/      # State management with GetX
 └── config/           # Configuration files
 
 backend/

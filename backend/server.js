@@ -69,7 +69,7 @@ app.post('/create-checkout-session', async (req, res) => {
                         currency: 'usd',
                         product_data: {
                             name: 'Account Funding',
-                            description: 'Add funds to your TechiBot account',
+                            description: 'Add funds to your AbyssiniaBot account',
                         },
                         unit_amount: Math.round(amount * 100), // Convert to cents
                     },

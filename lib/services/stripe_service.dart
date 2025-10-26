@@ -67,7 +67,7 @@ class StripeService {
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: clientSecret,
-          merchantDisplayName: 'TechiBot',
+          merchantDisplayName: 'AbyssiniaBot',
           style: ThemeMode.system,
           appearance: const PaymentSheetAppearance(
             colors: PaymentSheetAppearanceColors(
