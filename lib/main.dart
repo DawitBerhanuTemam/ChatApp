@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 import 'package:techi_chat_bot/screens/chat_screen.dart';
 import 'package:techi_chat_bot/screens/payment_screen.dart';
 import 'package:techi_chat_bot/services/stripe_service.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'AbyssiniaBot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
