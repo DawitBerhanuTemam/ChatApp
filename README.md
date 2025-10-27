@@ -11,13 +11,6 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 - 🎨 Modern Material Design 3 UI
 - 💾 Real-time message handling with state management
 
-## 📋 Development Plan
-
-For detailed Agile development plan, sprint planning, and roadmap, see **[AGILE_PLAN.md](AGILE_PLAN.md)**
-
-**Current Version**: 1.0 (MVP)  
-**Target Release**: Version 1.1 (End of Sprint 2)
-
 ## Quick Start
 
 ### 1. Install Dependencies
