@@ -6,7 +6,7 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 
 - 💬 Interactive chat interface with AI-powered responses
 - 🤖 Powered by Google Gemini AI
-- 💳 Stripe payment integration (works on web, mobile, and desktop)
+- 💳 Stripe payment integration 
 - 🌐 Cross-platform support (Web, iOS, Android, macOS, Windows, Linux)
 - 🎨 Modern Material Design 3 UI
 - 💾 Real-time message handling with state management
@@ -45,29 +45,7 @@ npm start
 
 Server runs on `http://localhost:3000`
 
-### 4. Run the App
 
-**Web (Chrome):**
-```bash
-flutter run -d chrome
-```
-
-**macOS:**
-```bash
-flutter run -d macos
-```
-
-**iOS/Android:**
-```bash
-flutter run
-```
-
-## Payment Testing
-
-Use Stripe test card:
-- **Card**: 4242 4242 4242 4242
-- **Expiry**: Any future date (e.g., 12/25)
-- **CVC**: Any 3 digits (e.g., 123)
 
 ## Technology Stack
 
