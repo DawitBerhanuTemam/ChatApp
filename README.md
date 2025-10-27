@@ -7,7 +7,6 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 - 💬 Interactive chat interface with AI-powered responses
 - 🤖 Powered by Google Gemini AI
 - 💳 Stripe payment integration 
-- 🌐 Cross-platform support (Web, iOS, Android, macOS, Windows, Linux)
 - 🎨 Modern Material Design 3 UI
 - 💾 Real-time message handling with state management
 
