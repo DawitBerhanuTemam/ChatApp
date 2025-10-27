@@ -155,7 +155,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: Text(
                 'ENTER AMOUNT',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: Colors.black45,
                   letterSpacing: 1.2,
@@ -165,31 +165,40 @@ class _PaymentScreenState extends State<PaymentScreen> {
             const SizedBox(height: 16),
 
             // Amount Input
-            TextField(
-              controller: _amountController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
-              decoration: const InputDecoration(
-                hintText: '0.00',
-                prefixText: '\$',
-                prefixStyle: TextStyle(
-                  fontSize: 56,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w300,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '\$',
+                  style: TextStyle(
+                    fontSize: 56,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
-              ),
-              style: const TextStyle(
-                fontSize: 56,
-                color: Colors.black,
-                fontWeight: FontWeight.w300,
-              ),
+                Expanded(
+                  child: TextField(
+                    controller: _amountController,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
+                    decoration: const InputDecoration(
+                      hintText: '0.00',
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    style: const TextStyle(
+                      fontSize: 56,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 30),
 
@@ -198,10 +207,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildQuickAmountButton(10),
+                _buildQuickAmountButton(20),
                 _buildQuickAmountButton(50),
                 _buildQuickAmountButton(100),
                 _buildQuickAmountButton(500),
-                _buildQuickAmountButton(750),
               ],
             ),
             const SizedBox(height: 50),
@@ -212,8 +221,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: ElevatedButton(
                 onPressed: _isProcessing ? null : _handlePayment,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -224,7 +233,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         height: 24,
                         width: 24,
                         child: CircularProgressIndicator(
-                          color: Colors.black,
+                          color: Colors.white,
                           strokeWidth: 2,
                         ),
                       )
@@ -233,6 +242,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
                       ),
               ),
@@ -251,6 +261,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ? null
             : () {
                 _amountController.text = amount.toString();
+                // Focus the text field to show the value
               },
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -263,6 +274,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Text(
           '\$$amount',
           style: const TextStyle(
+            fontFamily: 'Anderson',
             fontSize: 15,
             fontWeight: FontWeight.w600,
             color: Colors.black,

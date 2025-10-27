@@ -32,6 +32,58 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  Widget _buildFormattedText(String text, Color textColor) {
+    // Split text by lines to process heading patterns
+    List<TextSpan> textSpans = [];
+    List<String> lines = text.split('\n');
+    
+    for (String line in lines) {
+      // Remove all asterisks from the line
+      String cleanLine = line.replaceAll('*', '');
+      
+      // Check if line starts with ###, ##, or # (heading patterns)
+      String trimmedLine = cleanLine.trim();
+      if (trimmedLine.startsWith('###') || 
+          trimmedLine.startsWith('##') || 
+          trimmedLine.startsWith('#')) {
+        // Remove the heading markers and make it bold
+        String headingText = trimmedLine.replaceAll(RegExp(r'^#+\s*'), '').trim();
+        if (headingText.isNotEmpty) {
+          textSpans.add(TextSpan(
+            text: '$headingText\n',
+            style: TextStyle(
+              fontFamily: 'Anderson',
+              fontSize: 16.0,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+              height: 1.35,
+              letterSpacing: 0.1,
+            ),
+          ));
+        } else {
+          textSpans.add(const TextSpan(text: '\n'));
+        }
+      } else {
+        // Regular text
+        textSpans.add(TextSpan(
+          text: '$cleanLine\n',
+          style: TextStyle(
+            fontFamily: 'Anderson',
+            fontSize: 16.0,
+            color: textColor,
+            fontWeight: FontWeight.w400,
+            height: 1.35,
+            letterSpacing: 0.1,
+          ),
+        ));
+      }
+    }
+    
+    return RichText(
+      text: TextSpan(children: textSpans),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,16 +181,22 @@ class _ChatScreenState extends State<ChatScreen> {
                                     bottomRight: isUser ? const Radius.circular(4) : const Radius.circular(22),
                                   ),
                                 ),
-                                child: Text(
-                                  message['text'],
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: isUser ? Colors.white : Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.35,
-                                    letterSpacing: 0.1,
-                                  ),
-                                ),
+                                child: isUser
+                                    ? Text(
+                                        message['text'],
+                                        style: TextStyle(
+                                          fontFamily: 'Anderson',
+                                          fontSize: 16.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          height: 1.35,
+                                          letterSpacing: 0.1,
+                                        ),
+                                      )
+                                    : _buildFormattedText(
+                                        message['text'],
+                                        isUser ? Colors.white : Colors.black,
+                                      ),
                               ),
                               Padding(
                                 padding:
@@ -165,10 +223,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
+                        _buildFormattedText(
                           chatMessageController.responseText.value,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.grey),
+                          Colors.grey,
                         )
                       ],
                     ),
@@ -257,6 +314,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 const Text(
                   'AI can make mistakes. Please double-check responses.',
                   style: TextStyle(
+                    fontFamily: 'Anderson',
                     fontSize: 12,
                     color: Colors.black45,
                   ),
