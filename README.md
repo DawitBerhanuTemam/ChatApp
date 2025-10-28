@@ -12,12 +12,11 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 
 ## Screenshots
 
-<p align="center">
-  <img src="assets/images/1.png" alt="Screenshot 1" width="280" />
-  <img src="assets/images/2.png" alt="Screenshot 2" width="280" />
-  <img src="assets/images/3.png" alt="Screenshot 3" width="280" />
-  
-</p>
+<div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+  <img src="assets/images/1.png" alt="Screenshot 1" style="width: 280px; height: auto;" />
+  <img src="assets/images/2.png" alt="Screenshot 2" style="width: 280px; height: auto;" />
+  <img src="assets/images/3.png" alt="Screenshot 3" style="width: 280px; height: auto;" />
+</div>
 
 ## Quick Start
 
