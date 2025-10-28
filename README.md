@@ -10,6 +10,15 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 - 🎨 Modern Material Design 3 UI
 - 💾 Real-time message handling with state management
 
+## Screenshots
+
+<p align="center">
+  <img src="assets/images/1.png" alt="Screenshot 1" width="280" />
+  <img src="assets/images/2.png" alt="Screenshot 2" width="280" />
+  <img src="assets/images/3.png" alt="Screenshot 3" width="280" />
+  
+</p>
+
 ## Quick Start
 
 ### 1. Install Dependencies
