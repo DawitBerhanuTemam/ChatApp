@@ -1,14 +1,5 @@
 # AbyssiniaBot
 
-<style>
-@font-face {
-  font-family: 'AndersonGrotesk Light';
-  src: url('assets/Fonts/AndersonGrotesk Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-</style>
-
 A Flutter chatbot application with integrated Stripe payment system, powered by Google's Gemini AI.
 
 ## Features
