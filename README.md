@@ -1,21 +1,29 @@
 # AbyssiniaBot
 
+<style>
+@font-face {
+  font-family: 'AndersonGrotesk Light';
+  src: url('assets/Fonts/AndersonGrotesk Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+</style>
+
 A Flutter chatbot application with integrated Stripe payment system, powered by Google's Gemini AI.
 
 ## Features
 
-- 💬 Interactive chat interface with AI-powered responses
-- 🤖 Powered by Google Gemini AI
-- 💳 Stripe payment integration 
-- 🎨 Modern Material Design 3 UI
-- 💾 Real-time message handling with state management
+- Interactive chat interface with AI-powered responses
+- Powered by Google Gemini AI
+- Stripe payment integration 
+- Real-time message handling with state management
 
-## Screenshots
+## Mockups
 
-<div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
-  <img src="assets/images/1.png" alt="Screenshot 1" style="width: 260px; height: auto;" />
-  <img src="assets/images/2.png" alt="Screenshot 2" style="width: 260px; height: auto;" />
-  <img src="assets/images/3.png" alt="Screenshot 3" style="width: 260px; height: auto;" />
+<div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; font-family: 'AndersonGrotesk Light', -apple-system, system-ui, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Helvetica Neue', sans-serif;">
+  <img src="assets/images/1.png" alt="Screenshot 1" style="width: 273px; height: auto;" />
+  <img src="assets/images/2.png" alt="Screenshot 2" style="width: 273px; height: auto;" />
+  <img src="assets/images/3.png" alt="Screenshot 3" style="width: 273px; height: auto;" />
 </div>
 
 ## Quick Start
