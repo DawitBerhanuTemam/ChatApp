@@ -11,7 +11,7 @@ A Flutter chatbot application with integrated Stripe payment system, powered by 
 
 ## Mockups
 
-<div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; font-family: 'AndersonGrotesk Light', -apple-system, system-ui, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Helvetica Neue', sans-serif;">
+<div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
   <img src="assets/images/1.png" alt="Screenshot 1" style="width: 273px; height: auto;" />
   <img src="assets/images/2.png" alt="Screenshot 2" style="width: 273px; height: auto;" />
   <img src="assets/images/3.png" alt="Screenshot 3" style="width: 273px; height: auto;" />
